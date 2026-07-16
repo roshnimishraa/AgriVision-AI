@@ -241,10 +241,6 @@ Move to the project directory
 cd AgriVision-AI
 ```
 
-Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
+Install required dependencies
 
 ---
