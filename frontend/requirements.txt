@@ -1,0 +1,10 @@
+streamlit
+tensorflow-cpu
+joblib
+numpy
+pandas
+matplotlib
+Pillow
+scikit-learn
+shap
+fpdf2
