@@ -1,0 +1,71 @@
+
+# Dataset
+
+data/
+CropYield/
+*.zip
+
+
+# Trained Models
+
+*.pkl
+*.joblib
+*.h5
+*.keras
+*.pt
+*.pth
+*.onnx
+*.sav
+
+
+# Checkpoints
+
+checkpoints/
+*.ckpt
+
+
+# Jupyter Notebook
+
+.ipynb_checkpoints/
+
+
+# Python Cache
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+# Virtual Environment
+
+venv/
+env/
+ENV/
+.venv/
+
+
+# VS Code
+
+.vscode/
+
+
+# PyCharm
+
+.idea/
+
+
+# OS Files
+
+.DS_Store
+Thumbs.db
+
+
+# Logs
+
+*.log
+
+
+# Temporary Files
+
+temp/
+tmp/
