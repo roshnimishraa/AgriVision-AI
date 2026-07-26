@@ -5,7 +5,7 @@ from src.ui.html_utils import render_html
 
 def render():
 
-    theme.about_hero( 
+    theme.about_hero(
         "About AgriVision AI",
         "AgriVision AI is an explainable multimodal agricultural intelligence platform that "
         "combines deep learning and machine learning to detect crop diseases and predict crop "
