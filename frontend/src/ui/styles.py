@@ -293,7 +293,7 @@ div[data-testid="stImage"] img{{
     font-size:1rem;
     line-height:1.8;
     color:#555;
-    text-align:center;
+    text-align:center; 
 }}
 
 .avi-figure-card img{{
