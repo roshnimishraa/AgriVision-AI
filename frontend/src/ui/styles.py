@@ -15,15 +15,28 @@ CSS = f"""
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+*{{
+    box-sizing:border-box;
+}}
+
 html,
 body,
 [class*="css"]{{
     font-family:'Inter',sans-serif;
 }}
 
+html, body{{
+    overflow-x:hidden;
+}}
+
 #MainMenu{{ visibility:hidden; }}
 footer{{ visibility:hidden; }}
 header{{ visibility:hidden; }}
+
+img{{
+    max-width:100%;
+    height:auto;
+}}
 
 .block-container{{
     padding-top: 1rem !important;
@@ -33,14 +46,39 @@ header{{ visibility:hidden; }}
     max-width: 100% !important;
 }}
 
+@media(max-width:768px){{
+    .block-container{{
+        padding-left: 1.2rem !important;
+        padding-right: 1.2rem !important;
+    }}
+}}
+
+@media(max-width:480px){{
+    .block-container{{
+        padding-left: 0.8rem !important;
+        padding-right: 0.8rem !important;
+    }}
+}}
+
 .stApp{{
     background: linear-gradient(180deg, #fafdfb 0%, #f6faf6 45%, #ffffff 100%);
 }}
 
-h1{{ font-size:2.7rem; font-weight:800; color:{COLOR_PRIMARY_DEEP}; }}
-h2{{ font-size:2rem; font-weight:700; color:{COLOR_PRIMARY_DEEP}; margin-top:0.5rem; }}
-h3{{ font-size:1.4rem; font-weight:700; color:{COLOR_PRIMARY}; }}
-p{{ font-size:1rem; line-height:1.8; }}
+h1{{ font-size:2.2rem; font-weight:800; color:{COLOR_PRIMARY_DEEP}; }}
+h2{{ font-size:1.6rem; font-weight:700; color:{COLOR_PRIMARY_DEEP}; margin-top:0.5rem; }}
+h3{{ font-size:1.25rem; font-weight:700; color:{COLOR_PRIMARY}; }}
+p{{ font-size:0.95rem; line-height:1.6; }}
+
+@media(max-width:768px){{
+    h1{{ font-size:1.7rem; }}
+    h2{{ font-size:1.35rem; }}
+    h3{{ font-size:1.1rem; }}
+}}
+
+@media(max-width:480px){{
+    h1{{ font-size:1.45rem; }}
+    h2{{ font-size:1.2rem; }}
+}}
 
 .avi-navbar{{
     background:white;
@@ -65,24 +103,66 @@ p{{ font-size:1rem; line-height:1.8; }}
 }}
 
 .hero-title{{
-    font-size:2rem;
+    font-size:1.6rem;
     font-weight:800;
-    line-height:1.05;
-    margin-bottom:35px;
+    line-height:1.2;
+    margin-bottom:18px;
+    word-wrap:break-word;
 }}
 
 .hero-subtitle{{
-    font-size:1.7rem;
-    line-height:2.1;
+    font-size:1rem;
+    line-height:1.6;
     max-width:1000px;
     color:#555;
+    white-space:normal;
+    word-wrap:break-word;
+}}
+
+.tool-hero-subtitle{{
+    margin-top:0;
+}}
+
+.about-hero-title{{
+    color:#1B5E20;
+    font-size:2.3rem;
+    font-weight:800;
+    line-height:1.2;
+    margin:0 0 18px 0;
+    word-wrap:break-word;
+}}
+
+.about-hero-subtitle{{
+    font-size:1.05rem;
+    line-height:1.65;
+    color:#555;
+    margin-bottom:24px;
+    max-width:1100px;
+}}
+
+.avi-hero-img-wrap{{
+    width:100%;
+    max-width:520px;
+    margin:0 auto;
+}}
+
+@media(max-width:768px){{
+    .hero-title{{ font-size:1.35rem; }}
+    .hero-subtitle{{ font-size:0.95rem; }}
+    .about-hero-title{{ font-size:1.8rem; margin-bottom:14px; }}
+    .about-hero-subtitle{{ font-size:0.95rem; line-height:1.55; margin-bottom:18px; }}
+}}
+
+@media(max-width:480px){{
+    .hero-title{{ font-size:1.2rem; }}
+    .about-hero-title{{ font-size:1.5rem; }}
 }}
 
 .hero-card{{
     background: linear-gradient(135deg, #f7fcf7, #eef9ef);
     border-radius:{RADIUS_XL};
-    padding:45px;
-    margin-bottom:35px;
+    padding:28px;
+    margin-bottom:20px;
     border:1px solid #e5efe5;
     box-shadow:0 15px 40px rgba(0,0,0,.05);
     transition:.3s;
@@ -95,9 +175,9 @@ p{{ font-size:1rem; line-height:1.8; }}
 
 .avi-tool-hero{{
     border-radius:{RADIUS_XL};
-    padding:15px;
-    margin-bottom:10px;
-    margin-top:10px;
+    padding:10px;
+    margin-bottom:6px;
+    margin-top:6px;
 }}
 
 div[data-testid="stVerticalBlockBorderWrapper"]{{
@@ -187,12 +267,11 @@ div[data-testid="stMetric"]{{
 .avi-card-red{{ border-left:7px solid #d32f2f; }}
 
 img{{ border-radius:{RADIUS_LG}; }}
-hr{{ margin-top:35px; margin-bottom:35px; }}
+hr{{ margin-top:20px; margin-bottom:20px; }}
 
 @media(max-width:768px){{
     .hero-card,
-    .avi-tool-hero{{ padding:30px; }}
-    .hero-title{{ font-size:2.2rem; }}
+    .avi-tool-hero{{ padding:18px; }}
 }}
 
 .avi-steps{{ display:flex; gap:14px; margin-bottom:30px; flex-wrap:wrap; }}
@@ -226,17 +305,16 @@ hr{{ margin-top:35px; margin-bottom:35px; }}
 .avi-chip-row{{
     display:flex;
     flex-wrap:wrap;
-    gap:18px;
-    margin:45px 0;
+    gap:12px;
+    margin:20px 0;
 }}
 
 .avi-chip{{
     background:#F3F8F3;
     color:#1B5E20;
-    margin-top:-15px;
-    padding:15px 18px;
+    padding:10px 16px;
     border-radius:999px;
-    font-size:1rem;
+    font-size:0.8rem;
     font-weight:700;
 }}
 
@@ -254,7 +332,7 @@ div[data-testid="stImage"] img{{
     box-shadow:0 10px 30px rgba(0,0,0,.08);
 }}
 
-.hero-stats{{ display:flex; gap:18px; margin-top:25px; flex-wrap:wrap; }}
+.hero-stats{{ display:flex; gap:14px; margin-top:16px; flex-wrap:wrap; }}
 
 .hero-stat{{
     background:white;
@@ -293,7 +371,7 @@ div[data-testid="stImage"] img{{
     font-size:1rem;
     line-height:1.8;
     color:#555;
-    text-align:center; 
+    text-align:center;
 }}
 
 .avi-figure-card img{{
