@@ -100,4 +100,8 @@ def predict_with_row(model, encoders, area, item, year, rainfall, pesticides, te
 
     pred = float(model.predict(row[feature_cols])[0])
 
+<<<<<<< HEAD
     return pred, row, feature_cols
+=======
+    return pred, row, feature_cols
+>>>>>>> 8295c80c326721114d7f66a83a8961e80eb416f0

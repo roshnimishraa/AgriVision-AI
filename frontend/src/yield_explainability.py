@@ -30,4 +30,8 @@ def explain_prediction(row_df, feature_cols):
     shap.plots.waterfall(shap_values[0], show=False)
     plt.tight_layout()
 
+<<<<<<< HEAD
     return fig
+=======
+    return fig
+>>>>>>> 8295c80c326721114d7f66a83a8961e80eb416f0

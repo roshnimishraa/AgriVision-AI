@@ -47,6 +47,25 @@ def build_report(cached):
     pdf.set_font("Helvetica", "", 11)
     pdf.cell(0, 7, f"Region: {cached.get('selected_item', '')}", ln=True)
     pdf.cell(0, 7, f"Disease-aware forecast: {cached['fused_pred']:,.0f} hg/ha", ln=True)
+<<<<<<< HEAD
+=======
+
+    if cached.get("baseline_pred") is not None:
+        pdf.cell(
+            0,
+            7,
+            f"If disease ignored: {cached['baseline_pred']:,.0f} hg/ha",
+            ln=True
+        )
+
+    if cached.get("oracle_pred") is not None:
+        pdf.cell(
+            0,
+            7,
+            f"Best-case forecast: {cached['oracle_pred']:,.0f} hg/ha",
+            ln=True
+        )
+>>>>>>> 8295c80c326721114d7f66a83a8961e80eb416f0
 
     if cached.get("baseline_pred") is not None:
         pdf.cell(

@@ -88,4 +88,8 @@ def load_oracle_yield_model():
     return joblib.load(
         config.YIELD_MODEL_ORACLE_PATH,
         mmap_mode="r"
+<<<<<<< HEAD
     )
+=======
+    )
+>>>>>>> 8295c80c326721114d7f66a83a8961e80eb416f0
