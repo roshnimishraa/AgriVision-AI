@@ -1,11 +1,6 @@
 streamlit==1.37.0
-<<<<<<< HEAD
 tensorflow-cpu==2.20.0
-joblib
-=======
-tensorflow-cpu
 joblib==1.4.2
->>>>>>> 8295c80c326721114d7f66a83a8961e80eb416f0
 numpy
 pandas
 matplotlib
