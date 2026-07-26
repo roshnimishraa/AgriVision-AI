@@ -616,7 +616,7 @@ def _render_figure_grid(figures):
                     <div class="avi-figure-card">
                         <div class="avi-fig-title">
                             {title}
-                        </div>
+                        </div> 
                     """,
                     unsafe_allow_html=True,
                 )
