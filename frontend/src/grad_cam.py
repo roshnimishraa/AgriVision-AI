@@ -81,8 +81,4 @@ def overlay_heatmap(pil_img, heatmap, alpha=0.4):
         pil_img.convert("RGB"),
         heatmap_colored,
         alpha
-<<<<<<< HEAD
     )
-=======
-    )
->>>>>>> 8295c80c326721114d7f66a83a8961e80eb416f0
