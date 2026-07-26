@@ -381,7 +381,7 @@ def _render_detection(cached):
         st.image(
             cached["overlay"],
             caption="Grad-CAM: what the AI focused on",
-            use_container_width=True
+            use_column_width=True
         )
 
     else:
@@ -389,7 +389,7 @@ def _render_detection(cached):
         st.image(
             cached["image"],
             caption="Your photo",
-            use_container_width=True
+            use_column_width=True
         )
 
 
@@ -467,10 +467,7 @@ def _render_yield(cached):
 
         st.markdown("**Why this forecast (SHAP)**")
 
-        st.pyplot(
-            fig,
-            use_container_width=True
-        )
+        st.pyplot(fig)
 
         plt.close(fig)
         
@@ -616,7 +613,7 @@ def _render_figure_grid(figures):
                     <div class="avi-figure-card">
                         <div class="avi-fig-title">
                             {title}
-                        </div> 
+                        </div>
                     """,
                     unsafe_allow_html=True,
                 )
@@ -624,7 +621,7 @@ def _render_figure_grid(figures):
 
                 st.image(
                     path,
-                    use_container_width=True,
+                    use_column_width=True,
                 )
 
 
