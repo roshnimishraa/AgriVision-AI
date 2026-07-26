@@ -6,7 +6,7 @@ from src import model_loader
 
 @st.cache_resource(show_spinner=False)
 def get_endtoend_explainer():
-    import shap
+    import shap 
 
     model = model_loader.load_endtoend_yield_model()
 
