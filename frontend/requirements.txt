@@ -1,5 +1,5 @@
-streamlit
-tensorflow-cpu
+streamlit==1.37.0
+tensorflow-cpu==2.20.0
 joblib
 numpy
 pandas
@@ -8,3 +8,4 @@ Pillow
 scikit-learn
 shap
 fpdf2
+huggingface_hub
