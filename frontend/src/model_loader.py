@@ -1,97 +1,92 @@
-import numpy as np
-from PIL import Image
-import matplotlib.pyplot as plt
+import os
+import joblib
+import streamlit as st
 
-_grad_submodel_cache = {}
+from src import config
 
 
-def _get_grad_submodel(model):
-    key = id(model)
+def disease_model_available():
+    return os.path.exists(config.DISEASE_MODEL_PATH) and os.path.exists(config.DISEASE_META_PATH)
 
-    if key in _grad_submodel_cache:
-        return _grad_submodel_cache[key]
 
-    import tensorflow as tf
+def encoders_available():
+    return os.path.exists(config.FUSION_ENCODERS_PATH) or (
+        os.path.exists(config.AREA_ENCODER_PATH) and os.path.exists(config.ITEM_ENCODER_PATH)
+    )
 
-    last_conv_layer_name = None
 
-    for layer in reversed(model.layers):
-        try:
-            shape = layer.output.shape
-        except (AttributeError, ValueError):
-            continue
+def endtoend_model_available():
+    return os.path.exists(config.YIELD_MODEL_ENDTOEND_PATH)
 
-        if shape is not None and len(shape) == 4:
-            last_conv_layer_name = layer.name
-            break
 
-    if last_conv_layer_name is None:
-        _grad_submodel_cache[key] = None
+def baseline_model_available():
+    return os.path.exists(config.YIELD_MODEL_BASELINE_PATH)
+
+
+def oracle_model_available():
+    return os.path.exists(config.YIELD_MODEL_ORACLE_PATH)
+
+
+@st.cache_resource(show_spinner=False)
+def load_disease_model():
+    if not disease_model_available():
         return None
 
-    grad_model = tf.keras.models.Model(
-        [model.inputs],
-        [model.get_layer(last_conv_layer_name).output, model.output]
-    )
-
-    _grad_submodel_cache[key] = grad_model
-    return grad_model
-
-
-def compute_heatmap(model, img_array):
     import tensorflow as tf
+    return tf.keras.models.load_model(config.DISEASE_MODEL_PATH)
 
-    grad_model = _get_grad_submodel(model)
 
-    if grad_model is None:
+@st.cache_resource(show_spinner=False)
+def load_disease_meta():
+    if not os.path.exists(config.DISEASE_META_PATH):
         return None
 
-    with tf.GradientTape() as tape:
-        conv_outputs, predictions = grad_model(img_array)
-        pred_index = tf.argmax(predictions[0])
-        class_channel = predictions[:, pred_index]
+    return joblib.load(config.DISEASE_META_PATH)
 
-    grads = tape.gradient(
-        class_channel,
-        conv_outputs
+
+@st.cache_resource(show_spinner=False)
+def load_encoders():
+    if os.path.exists(config.FUSION_ENCODERS_PATH):
+        return joblib.load(config.FUSION_ENCODERS_PATH)
+
+    if os.path.exists(config.AREA_ENCODER_PATH) and os.path.exists(config.ITEM_ENCODER_PATH):
+        return {
+            "area_encoder": joblib.load(config.AREA_ENCODER_PATH),
+            "item_encoder": joblib.load(config.ITEM_ENCODER_PATH),
+        }
+
+    return None
+
+
+@st.cache_resource(show_spinner=False)
+def load_endtoend_yield_model():
+    if not endtoend_model_available():
+        return None
+
+    return joblib.load(
+        config.YIELD_MODEL_ENDTOEND_PATH,
+        mmap_mode="r"
     )
 
-    pooled_grads = tf.reduce_mean(
-        grads,
-        axis=(0, 1, 2)
+
+@st.cache_resource(show_spinner=False)
+def load_baseline_yield_model():
+    if not baseline_model_available():
+        return None
+
+    return joblib.load(
+        config.YIELD_MODEL_BASELINE_PATH,
+        mmap_mode="r"
     )
 
-    conv_outputs = conv_outputs[0]
 
-    heatmap = conv_outputs @ pooled_grads[..., tf.newaxis]
-    heatmap = tf.squeeze(heatmap)
+@st.cache_resource(show_spinner=False)
+def load_oracle_yield_model():
+    if not oracle_model_available():
+        return None
 
-    heatmap = tf.maximum(heatmap, 0)
-
-    heatmap = heatmap / (
-        tf.math.reduce_max(heatmap) + 1e-8
+    return joblib.load(
+        config.YIELD_MODEL_ORACLE_PATH,
+        mmap_mode="r"
     )
-
-    return heatmap.numpy()
-
-
-def overlay_heatmap(pil_img, heatmap, alpha=0.4):
-    heatmap_img = Image.fromarray(
-        np.uint8(255 * heatmap)
-    ).resize(pil_img.size)
-
-    cmap = plt.get_cmap("jet")
-
-    heatmap_colored = cmap(
-        np.array(heatmap_img) / 255.0
-    )[:, :, :3]
-
-    heatmap_colored = Image.fromarray(
-        np.uint8(heatmap_colored * 255)
-    )
-
-    return Image.blend(
-        pil_img.convert("RGB"),
-        heatmap_colored,
-        alpha
-    )
+    
