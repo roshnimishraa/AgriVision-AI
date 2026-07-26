@@ -249,7 +249,7 @@ def step_indicator(current_step=None):
             <div class="avi-arrow">➜</div>
 
             <div class="avi-step-item">
-                <div class="avi-step-pill">4. Report</div>
+                <div class="avi-step-pill">4. Report</div> 
             </div>
 
         </div>
