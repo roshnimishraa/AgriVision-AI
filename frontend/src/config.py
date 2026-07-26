@@ -166,7 +166,7 @@ HERO_IMAGE_PATH = os.path.join(
 
 DISEASE_FIGURES_DIR = os.path.join(
     ASSETS_DIR,
-    "disease_detection_figures"
+    "disease_figures"
 )
 
 
