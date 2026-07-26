@@ -18,7 +18,7 @@ FILES = [
 
 
 def download_models():
- 
+
     os.makedirs(
         config.HF_CACHE_DIR,
         exist_ok=True
