@@ -1,7 +1,6 @@
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-<<<<<<< HEAD
 
 MODELS_DIR = os.path.join(BASE_DIR, "models")
 ASSETS_DIR = os.path.join(BASE_DIR, "assets")
@@ -66,7 +65,6 @@ YIELD_MODEL_BASELINE_PATH = os.path.join(
     YIELD_MODEL_BASELINE_FILENAME
 )
 
-=======
 MODELS_DIR = os.path.join(BASE_DIR, "models")
 
 DISEASE_MODEL_PATH = os.path.join(MODELS_DIR, "best_disease_model.keras")
@@ -80,7 +78,6 @@ ITEM_ENCODER_PATH = os.path.join(MODELS_DIR, "item_encoder.pkl")
 YIELD_MODEL_ENDTOEND_PATH = os.path.join(MODELS_DIR, "fused_yield_model_endtoend.joblib")
 YIELD_MODEL_ORACLE_PATH = os.path.join(MODELS_DIR, "fused_yield_model_oracle.joblib")
 YIELD_MODEL_BASELINE_PATH = os.path.join(MODELS_DIR, "baseline_yield_model.joblib")
->>>>>>> 8295c80c326721114d7f66a83a8961e80eb416f0
 
 BASE_FEATURES = [
     "Area_enc",
@@ -91,7 +88,6 @@ BASE_FEATURES = [
     "avg_temp",
 ]
 
-<<<<<<< HEAD
 
 SEVERITY_FEATURE_ENDTOEND = "disease_severity_endtoend"
 SEVERITY_FEATURE_ORACLE = "disease_severity_oracle"
@@ -175,7 +171,6 @@ YIELD_FUSION_COMPARISON_PATH = os.path.join(
     YIELD_FIGURES_DIR,
     "fusion_comparison.png"
 )
-=======
 SEVERITY_FEATURE_ENDTOEND = "disease_severity_endtoend"
 SEVERITY_FEATURE_ORACLE = "disease_severity_oracle"
 
@@ -200,4 +195,3 @@ YIELD_SHAP_BAR_PATH = os.path.join(YIELD_FIGURES_DIR, "SHAP_Bar.png")
 YIELD_SHAP_BEESWARM_PATH = os.path.join(YIELD_FIGURES_DIR, "SHAP_Beeswarm.png")
 YIELD_SHAP_WATERFALL_PATH = os.path.join(YIELD_FIGURES_DIR, "SHAP_Waterfall.png")
 YIELD_FUSION_COMPARISON_PATH = os.path.join(YIELD_FIGURES_DIR, "fusion_comparison.png")
->>>>>>> 8295c80c326721114d7f66a83a8961e80eb416f0
