@@ -3,10 +3,20 @@ import pandas as pd
 from src import config
 
 
-def build_feature_row(encoders, area, item, year, rainfall, pesticides, temp,
-                      severity=None, severity_feature_name=None):
+def build_feature_row(
+    encoders,
+    area,
+    item,
+    year,
+    rainfall,
+    pesticides,
+    temp,
+    severity=None,
+    severity_feature_name=None,
+):
 
-    le_area, le_item = encoders["area_encoder"], encoders["item_encoder"]
+    le_area = encoders["area_encoder"]
+    le_item = encoders["item_encoder"]
 
     try:
         area_enc = int(le_area.transform([area])[0])
@@ -40,7 +50,8 @@ def supported_yield_items(all_items):
         all_accepted |= names
 
     matches = [
-        item for item in all_items
+        item
+        for item in all_items
         if str(item).strip().lower() in all_accepted
     ]
 
@@ -59,10 +70,20 @@ def yield_item_for_disease_class(disease_class, all_items):
     return None
 
 
-def predict(model, encoders, area, item, year, rainfall, pesticides, temp,
-            severity=None, severity_feature_name=None):
+def predict(
+    model,
+    encoders,
+    area,
+    item,
+    year,
+    rainfall,
+    pesticides,
+    temp,
+    severity=None,
+    severity_feature_name=None,
+):
 
-    pred, _row, _cols = predict_with_row(
+    pred, _, _ = predict_with_row(
         model,
         encoders,
         area,
@@ -72,14 +93,24 @@ def predict(model, encoders, area, item, year, rainfall, pesticides, temp,
         pesticides,
         temp,
         severity,
-        severity_feature_name
+        severity_feature_name,
     )
 
     return pred
 
 
-def predict_with_row(model, encoders, area, item, year, rainfall, pesticides, temp,
-                     severity=None, severity_feature_name=None):
+def predict_with_row(
+    model,
+    encoders,
+    area,
+    item,
+    year,
+    rainfall,
+    pesticides,
+    temp,
+    severity=None,
+    severity_feature_name=None,
+):
 
     row = build_feature_row(
         encoders,
@@ -90,7 +121,7 @@ def predict_with_row(model, encoders, area, item, year, rainfall, pesticides, te
         pesticides,
         temp,
         severity,
-        severity_feature_name
+        severity_feature_name,
     )
 
     feature_cols = list(config.BASE_FEATURES)
@@ -100,5 +131,4 @@ def predict_with_row(model, encoders, area, item, year, rainfall, pesticides, te
 
     pred = float(model.predict(row[feature_cols])[0])
 
-    return pred, row, feature_cols
     return pred, row, feature_cols
