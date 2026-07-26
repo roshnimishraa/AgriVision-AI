@@ -8,8 +8,10 @@ from src.ui.html_utils import render_html
 def navbar():
     """Top navigation bar."""
 
-    page = st.query_params.get("page", "about")
-    st.session_state["current_page"] = page
+    if "current_page" not in st.session_state:
+        st.session_state["current_page"] = st.query_params.get("page", "about")
+
+    page = st.session_state["current_page"]
 
     logo, home, tool, blank = st.columns([1.5, 0.8, 0.8, 0.1])
 
@@ -23,6 +25,7 @@ def navbar():
             use_container_width=True,
             type="primary" if page == "about" else "secondary",
         ):
+            st.session_state["current_page"] = "about"
             st.query_params["page"] = "about"
             st.rerun()
 
@@ -33,6 +36,7 @@ def navbar():
             use_container_width=True,
             type="primary" if page == "tool" else "secondary",
         ):
+            st.session_state["current_page"] = "tool"
             st.query_params["page"] = "tool"
             st.rerun()
 
@@ -40,7 +44,7 @@ def navbar():
 def about_hero(title, subtitle):
     """Hero section used on the About page."""
 
-    st.markdown("<div style='height:60px'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height:30px'></div>", unsafe_allow_html=True)
 
     has_image = os.path.exists(config.HERO_IMAGE_PATH)
 
@@ -54,13 +58,7 @@ def about_hero(title, subtitle):
 
         render_html(
             f"""
-            <h1 style="
-                color:#1B5E20;
-                font-size:3rem;
-                font-weight:800;
-                line-height:1.05;
-                margin:0 0 35px 0;
-            ">
+            <h1 class="about-hero-title">
                 {title}
             </h1>
             """
@@ -68,13 +66,7 @@ def about_hero(title, subtitle):
 
         render_html(
             f"""
-            <p style="
-                font-size:1.3rem;
-                line-height:2;
-                color:#555;
-                margin-bottom:45px;
-                max-width:1100px;
-            ">
+            <p class="about-hero-subtitle">
                 {subtitle}
             </p>
             """
@@ -85,8 +77,8 @@ def about_hero(title, subtitle):
             <div style="
                 display:flex;
                 flex-wrap:wrap;
-                gap:22px;
-                margin-bottom:55px;
+                gap:16px;
+                margin-bottom:32px;
             ">
 
                 <div class="avi-chip">Unified AI System</div>
@@ -101,7 +93,7 @@ def about_hero(title, subtitle):
             """
         )
 
-        st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
+        st.markdown("<div style='height:12px'></div>", unsafe_allow_html=True)
 
         left_space, center, right_space = st.columns([1, 1.2, 1])
 
@@ -112,17 +104,20 @@ def about_hero(title, subtitle):
                 type="primary",
                 use_container_width=True,
             ):
+                st.session_state["current_page"] = "tool"
                 st.query_params["page"] = "tool"
                 st.rerun()
 
     if right:
         with right:
-            st.markdown("<div style='height:35px'></div>", unsafe_allow_html=True)
+            st.markdown("<div style='height:15px'></div>", unsafe_allow_html=True)
 
+            render_html('<div class="avi-hero-img-wrap">')
             st.image(
                 config.HERO_IMAGE_PATH,
-                width=700,
+                use_column_width=True,
             )
+            render_html('</div>')
 
 
 def hero():
@@ -132,17 +127,11 @@ def hero():
         """
         <div class="avi-tool-hero">
 
-            <div class="hero-title" style="
-                margin-bottom:10px;
-            ">
+            <div class="hero-title" style="margin-bottom:10px;">
                 Crop Disease Detection &amp; Yield Prediction
             </div>
 
-            <div class="hero-subtitle" style="
-                white-space: nowrap;
-                font-size:1.2rem;
-                margin-top:0;
-            ">
+            <div class="hero-subtitle tool-hero-subtitle">
                 Upload a crop leaf image and provide agricultural conditions to detect diseases, estimate disease severity, predict crop yield, and understand every prediction using Explainable AI.
             </div>
 
@@ -173,8 +162,8 @@ def step_indicator(current_step=None):
             display:flex;
             justify-content:space-between;
             align-items:center;
-            margin:10px 0 45px;
-            gap:18px;
+            margin:8px 0 24px;
+            gap:14px;
         }
 
         .avi-step-item{
@@ -188,19 +177,19 @@ def step_indicator(current_step=None):
             background:#ffffff;
             border:none;
             border-radius:40px;
-            padding:16px 22px;
+            padding:12px 18px;
             text-align:center;
-            font-size:20px;
+            font-size:16px;
             font-weight:700;
             color:#2E7D32;
             box-shadow:0 4px 10px rgba(0,0,0,.08);
         }
 
         .avi-arrow{
-            font-size:28px;
+            font-size:22px;
             font-weight:700;
             color:#43A047;
-            margin:0 12px;
+            margin:0 8px;
             user-select:none;
         }
 
@@ -249,7 +238,7 @@ def step_indicator(current_step=None):
             <div class="avi-arrow">➜</div>
 
             <div class="avi-step-item">
-                <div class="avi-step-pill">4. Report</div> 
+                <div class="avi-step-pill">4. Report</div>
             </div>
 
         </div>
