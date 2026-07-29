@@ -1,0 +1,20 @@
+{
+  "xgboost": {
+    "accuracy": 0.9698492462311558,
+    "macro_f1": 0.9550988350114984
+  },
+  "random_forest": {
+    "accuracy": 0.9547738693467337,
+    "macro_f1": 0.9308899141186542
+  },
+  "mobilenetv2": {
+    "accuracy": 0.9608040201005025,
+    "macro_f1": 0.9444284474760207
+  },
+  "efficientnetb0": {
+    "accuracy": 0.9718592964824121,
+    "macro_f1": 0.9616430031611434
+  },
+  "best_model": "efficientnetb0",
+  "split": "test"
+}
