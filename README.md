@@ -103,7 +103,7 @@ Neither dataset is included in the repository.
 
 ## Model Comparison
 
-### Crop Yield Prediction ✅ *verified — temporal split*
+### Crop Yield Prediction  *verified — temporal split*
 
 Trained on 1990–2009 (23,233 rows), tested on 2010–2013 (5,009 rows).
 
@@ -125,7 +125,7 @@ The Random Forest row describes the **deployed** model. Notebooks 03 and 08 trai
 
 That MAE gap is the leakage, quantified. A random split on a country × crop × year panel scatters near-identical neighbouring years across train and test, so the model was largely recalling yields it had already seen.
 
-### Crop Disease Detection ✅ *verified — held-out test split*
+### Crop Disease Detection  *verified — held-out test split*
 
 4,660 train / 995 val / 995 test images, capped at 1000 per class, all models trained with balanced class weights. Metrics are from the **test** split, which was not used for hyperparameter selection or epoch monitoring.
 
