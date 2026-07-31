@@ -28,9 +28,10 @@ AgriVision AI is a Machine Learning and Deep Learning based agricultural decisio
 - Compares Linear Regression, Decision Tree and Random Forest.
 - Saved trained model and label encoders.
 
+<!--
 ### Web Application
 A Streamlit app in [`frontend/`](frontend/) serves both models with Grad-CAM, SHAP and a PDF report. See [frontend/Readme.md](frontend/Readme.md).
-
+-->
 ---
 
 ## Why there is no fusion
@@ -159,6 +160,7 @@ conda env create -f environment.yml
 conda activate agrivision
 ```
 
+<!--
 For the web app:
 ```bash
 conda env create -f frontend/environment.yml
@@ -170,9 +172,9 @@ conda activate agrivision-app
 Plain pip works too if you prefer, as long as the interpreter is 3.11:
 ```bash
 python3.11 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt              # notebooks
 pip install -r frontend/requirements.txt     # app
 ```
+-->
 
 ---
 
@@ -190,6 +192,7 @@ Download both datasets from the links above. The yield notebooks expect `data/Cr
 
 Notebooks 05–08 use Colab-specific calls (`google.colab.files`, `drive.mount`, `!kaggle`) and a GPU. Notebook 08 requires two files produced by notebook 07 (`disease_test_predictions.csv`, `disease_meta.joblib`) to be uploaded manually.
 
+<!--
 ### Web app
 
 ```bash
@@ -198,5 +201,5 @@ streamlit run app.py
 ```
 
 Model files download from Hugging Face on first use, so the first run needs an internet connection.
-
+-->
 ---
